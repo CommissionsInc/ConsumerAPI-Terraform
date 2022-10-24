@@ -1,0 +1,43 @@
+// Shared
+region  = "us-east-2"
+owner   = "consumer"
+project = "consumer-api"
+tags = {
+  Name    = "consumer-api"
+  Owner   = "consumer"
+  Project = "consumer-api"
+}
+
+// CodePipeline/CodeBuild
+dotnetcore_build_version = "3.1"
+aspnetcore_environment   = "Release"
+github_project_name      = "ConsumerAPI"
+github_repo_url          = "https://github.com/CommissionsInc/ConsumerAPI"
+project_name             = "consumer-api"
+solution_file            = "ConsumerAPI/ConsumerAPI.sln"
+
+// Lambda API
+name             = "consumer-api"
+description      = "The Consumer API allows fetching of public information about a domain."
+handler_function = "Consumer.API::Consumer.API.LambdaEntryPoint::FunctionHandlerAsync"
+runtime          = "dotnetcore3.1"
+memory_size      = 1024
+timeout          = 600
+api_key_required = false
+
+// Shared
+environment      = "uat"
+full_domain_name = "uat.consumer.cincapi.com"
+base_domain_name = "consumer.cincapi.com"
+
+// CodePipeline/CodeBuild
+repo_branch = "develop"
+
+// Lambda
+environment_variables = {
+  CDNOrigin       = "https://s-static.cinccdn.com",
+  GenesisDatabase = "data source=coredb1.cincglobal.com;uid=consumerapi;pwd=Cinc^2020!1;Database=Genesis;MultipleActiveResultSets=true;",
+  S3_Bucket_Nam   = "cinc-us-east-2-assets-consumer-uat",
+  RedisConnection = "use2redisuat1.cincglobal.com:6379",
+  RedisPassword   = "cincuat"
+}
